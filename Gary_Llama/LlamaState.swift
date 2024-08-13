@@ -80,7 +80,7 @@ class LlamaState: ObservableObject {
 
         Model(name: "Mistral-7B-v0.1 (Q4_0, 3.8 GiB)", url: "https://huggingface.co/TheBloke/Mistral-7B-v0.1-GGUF/resolve/main/mistral-7b-v0.1.Q4_0.gguf?download=true", filename: "mistral-7b-v0.1.Q4_0.gguf", status: "download"),
 
-        Model(name: "Qwen2-1.5B-Instruct (Q4_K_S, 3.5 GiB)", url: "https://huggingface.co/MaziyarPanahi/Qwen2-1.5B-Instruct-GGUF/resolve/main/Qwen2-1.5B-Instruct.Q4_K_S.gguf?download=true", filename: "Qwen2-1.5B-Instruct.Q4_K_S.gguf", status: "download")
+        Model(name: "Qwen2-1.5B-Instruct (Best Model so Far) (Q4_K_S, 3.5 GiB)", url: "https://huggingface.co/MaziyarPanahi/Qwen2-1.5B-Instruct-GGUF/resolve/main/Qwen2-1.5B-Instruct.Q4_K_S.gguf?download=true", filename: "Qwen2-1.5B-Instruct.Q4_K_S.gguf", status: "download")
     ]
 
     func loadModel(modelUrl: URL?) throws {
@@ -100,7 +100,7 @@ class LlamaState: ObservableObject {
         undownloadedModels.removeAll { $0.name == modelName }
     }
 
-    func complete(text: String) async {
+   func complete(text: String) async {
         guard let llamaContext else {
             return
         }
@@ -111,9 +111,10 @@ class LlamaState: ObservableObject {
         let t_heat = Double(t_heat_end - t_start) / NS_PER_S
 
         messageLog += "\(text)"
+        let timeoutTime = DispatchTime.now().advanced(by: .seconds(30)) // Set the timeout for 30 seconds from now
 
         Task.detached {
-            while await !llamaContext.is_done {
+            while await !llamaContext.is_done && DispatchTime.now() < timeoutTime {
                 let result = await llamaContext.completion_loop()
                 await MainActor.run {
                     self.messageLog += "\(result)"
@@ -133,6 +134,9 @@ class LlamaState: ObservableObject {
                     Heat up took \(t_heat)s
                     Generated \(tokens_per_second) t/s\n
                     """
+                if DispatchTime.now() >= timeoutTime {
+                    self.messageLog += "Timeout limit reached, ask another question!.\n"
+                }
             }
         }
     }

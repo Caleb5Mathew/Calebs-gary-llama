@@ -92,7 +92,7 @@ class LlamaState: ObservableObject {
             // Assuming that the model is successfully loaded, update the downloaded models
             updateDownloadedModels(modelName: modelUrl.lastPathComponent, status: "downloaded")
         } else {
-            messageLog += "Load a model from the list below\n"
+            messageLog += "Load a model from the View models button below\n"
         }
     }
 

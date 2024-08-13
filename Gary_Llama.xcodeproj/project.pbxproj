@@ -1,0 +1,700 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24296E682C585368004D8FFC /* Gary_LlamaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296E672C585368004D8FFC /* Gary_LlamaApp.swift */; };
+		24296E6A2C585368004D8FFC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296E692C585368004D8FFC /* ContentView.swift */; };
+		24296E6C2C58536B004D8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24296E6B2C58536B004D8FFC /* Assets.xcassets */; };
+		24296E6F2C58536B004D8FFC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24296E6E2C58536B004D8FFC /* Preview Assets.xcassets */; };
+		24296E792C58536B004D8FFC /* Gary_LlamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296E782C58536B004D8FFC /* Gary_LlamaTests.swift */; };
+		24296E832C58536B004D8FFC /* Gary_LlamaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296E822C58536B004D8FFC /* Gary_LlamaUITests.swift */; };
+		24296E852C58536B004D8FFC /* Gary_LlamaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296E842C58536B004D8FFC /* Gary_LlamaUITestsLaunchTests.swift */; };
+		24296E942C586033004D8FFC /* Qwen2-1.5B-Instruct.Q4_K_S.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 24296E922C586033004D8FFC /* Qwen2-1.5B-Instruct.Q4_K_S.gguf */; };
+		24296E982C586AB7004D8FFC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24296E972C586AB7004D8FFC /* libc++.tbd */; };
+		24296E9A2C586ABE004D8FFC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24296E992C586ABE004D8FFC /* libz.tbd */; };
+		24296EC52C588930004D8FFC /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296EC42C588930004D8FFC /* LibLlama.swift */; };
+		24296EC92C588E47004D8FFC /* DownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296EC82C588E47004D8FFC /* DownloadButton.swift */; };
+		24296ECB2C588E58004D8FFC /* InputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296ECA2C588E58004D8FFC /* InputButton.swift */; };
+		24296ECD2C588E67004D8FFC /* LoadCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296ECC2C588E67004D8FFC /* LoadCustomButton.swift */; };
+		24296ED22C58908C004D8FFC /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24296ED12C58908C004D8FFC /* LlamaState.swift */; };
+		24296ED72C589485004D8FFC /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 24296ED62C589485004D8FFC /* llama */; };
+		3C32B55A2C5AFA9300A03B04 /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 3C32B5592C5AFA9300A03B04 /* llama */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24296E752C58536B004D8FFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24296E5C2C585368004D8FFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24296E632C585368004D8FFC;
+			remoteInfo = Gary_Llama;
+		};
+		24296E7F2C58536B004D8FFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24296E5C2C585368004D8FFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24296E632C585368004D8FFC;
+			remoteInfo = Gary_Llama;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		24296E642C585368004D8FFC /* Gary_Llama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gary_Llama.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24296E672C585368004D8FFC /* Gary_LlamaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gary_LlamaApp.swift; sourceTree = "<group>"; };
+		24296E692C585368004D8FFC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		24296E6B2C58536B004D8FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		24296E6E2C58536B004D8FFC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		24296E742C58536B004D8FFC /* Gary_LlamaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gary_LlamaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24296E782C58536B004D8FFC /* Gary_LlamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gary_LlamaTests.swift; sourceTree = "<group>"; };
+		24296E7E2C58536B004D8FFC /* Gary_LlamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gary_LlamaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24296E822C58536B004D8FFC /* Gary_LlamaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gary_LlamaUITests.swift; sourceTree = "<group>"; };
+		24296E842C58536B004D8FFC /* Gary_LlamaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gary_LlamaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		24296E912C586033004D8FFC /* Gary_Llama-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gary_Llama-Bridging-Header.h"; sourceTree = "<group>"; };
+		24296E922C586033004D8FFC /* Qwen2-1.5B-Instruct.Q4_K_S.gguf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Qwen2-1.5B-Instruct.Q4_K_S.gguf"; sourceTree = "<group>"; };
+		24296E972C586AB7004D8FFC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		24296E992C586ABE004D8FFC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		24296EC42C588930004D8FFC /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
+		24296EC82C588E47004D8FFC /* DownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadButton.swift; sourceTree = "<group>"; };
+		24296ECA2C588E58004D8FFC /* InputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputButton.swift; sourceTree = "<group>"; };
+		24296ECC2C588E67004D8FFC /* LoadCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCustomButton.swift; sourceTree = "<group>"; };
+		24296ED12C58908C004D8FFC /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
+		3C32B55C2C5AFABB00A03B04 /* llama.cpp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = llama.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		24296E612C585368004D8FFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24296ED72C589485004D8FFC /* llama in Frameworks */,
+				24296E9A2C586ABE004D8FFC /* libz.tbd in Frameworks */,
+				24296E982C586AB7004D8FFC /* libc++.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24296E712C58536B004D8FFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C32B55A2C5AFA9300A03B04 /* llama in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24296E7B2C58536B004D8FFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24296E5B2C585368004D8FFC = {
+			isa = PBXGroup;
+			children = (
+				24296ECE2C588F21004D8FFC /* Packages */,
+				24296E662C585368004D8FFC /* Gary_Llama */,
+				24296E772C58536B004D8FFC /* Gary_LlamaTests */,
+				24296E812C58536B004D8FFC /* Gary_LlamaUITests */,
+				24296E652C585368004D8FFC /* Products */,
+				24296E962C586AB7004D8FFC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		24296E652C585368004D8FFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24296E642C585368004D8FFC /* Gary_Llama.app */,
+				24296E742C58536B004D8FFC /* Gary_LlamaTests.xctest */,
+				24296E7E2C58536B004D8FFC /* Gary_LlamaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24296E662C585368004D8FFC /* Gary_Llama */ = {
+			isa = PBXGroup;
+			children = (
+				24296E672C585368004D8FFC /* Gary_LlamaApp.swift */,
+				24296E922C586033004D8FFC /* Qwen2-1.5B-Instruct.Q4_K_S.gguf */,
+				24296E912C586033004D8FFC /* Gary_Llama-Bridging-Header.h */,
+				24296E692C585368004D8FFC /* ContentView.swift */,
+				24296EC82C588E47004D8FFC /* DownloadButton.swift */,
+				24296ED12C58908C004D8FFC /* LlamaState.swift */,
+				24296ECA2C588E58004D8FFC /* InputButton.swift */,
+				24296ECC2C588E67004D8FFC /* LoadCustomButton.swift */,
+				24296EC42C588930004D8FFC /* LibLlama.swift */,
+				24296E6B2C58536B004D8FFC /* Assets.xcassets */,
+				24296E6D2C58536B004D8FFC /* Preview Content */,
+			);
+			path = Gary_Llama;
+			sourceTree = "<group>";
+		};
+		24296E6D2C58536B004D8FFC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				24296E6E2C58536B004D8FFC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		24296E772C58536B004D8FFC /* Gary_LlamaTests */ = {
+			isa = PBXGroup;
+			children = (
+				24296E782C58536B004D8FFC /* Gary_LlamaTests.swift */,
+			);
+			path = Gary_LlamaTests;
+			sourceTree = "<group>";
+		};
+		24296E812C58536B004D8FFC /* Gary_LlamaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				24296E822C58536B004D8FFC /* Gary_LlamaUITests.swift */,
+				24296E842C58536B004D8FFC /* Gary_LlamaUITestsLaunchTests.swift */,
+			);
+			path = Gary_LlamaUITests;
+			sourceTree = "<group>";
+		};
+		24296E962C586AB7004D8FFC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24296E992C586ABE004D8FFC /* libz.tbd */,
+				24296E972C586AB7004D8FFC /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		24296ECE2C588F21004D8FFC /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				3C32B55C2C5AFABB00A03B04 /* llama.cpp */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		24296E632C585368004D8FFC /* Gary_Llama */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24296E882C58536B004D8FFC /* Build configuration list for PBXNativeTarget "Gary_Llama" */;
+			buildPhases = (
+				24296E602C585368004D8FFC /* Sources */,
+				24296E612C585368004D8FFC /* Frameworks */,
+				24296E622C585368004D8FFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Gary_Llama;
+			packageProductDependencies = (
+				24296ED62C589485004D8FFC /* llama */,
+			);
+			productName = Gary_Llama;
+			productReference = 24296E642C585368004D8FFC /* Gary_Llama.app */;
+			productType = "com.apple.product-type.application";
+		};
+		24296E732C58536B004D8FFC /* Gary_LlamaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24296E8B2C58536B004D8FFC /* Build configuration list for PBXNativeTarget "Gary_LlamaTests" */;
+			buildPhases = (
+				24296E702C58536B004D8FFC /* Sources */,
+				24296E712C58536B004D8FFC /* Frameworks */,
+				24296E722C58536B004D8FFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24296E762C58536B004D8FFC /* PBXTargetDependency */,
+			);
+			name = Gary_LlamaTests;
+			packageProductDependencies = (
+				3C32B5592C5AFA9300A03B04 /* llama */,
+			);
+			productName = Gary_LlamaTests;
+			productReference = 24296E742C58536B004D8FFC /* Gary_LlamaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		24296E7D2C58536B004D8FFC /* Gary_LlamaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24296E8E2C58536B004D8FFC /* Build configuration list for PBXNativeTarget "Gary_LlamaUITests" */;
+			buildPhases = (
+				24296E7A2C58536B004D8FFC /* Sources */,
+				24296E7B2C58536B004D8FFC /* Frameworks */,
+				24296E7C2C58536B004D8FFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24296E802C58536B004D8FFC /* PBXTargetDependency */,
+			);
+			name = Gary_LlamaUITests;
+			productName = Gary_LlamaUITests;
+			productReference = 24296E7E2C58536B004D8FFC /* Gary_LlamaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		24296E5C2C585368004D8FFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					24296E632C585368004D8FFC = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					24296E732C58536B004D8FFC = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 24296E632C585368004D8FFC;
+					};
+					24296E7D2C58536B004D8FFC = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 24296E632C585368004D8FFC;
+					};
+				};
+			};
+			buildConfigurationList = 24296E5F2C585368004D8FFC /* Build configuration list for PBXProject "Gary_Llama" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 24296E5B2C585368004D8FFC;
+			packageReferences = (
+				24296ED52C589485004D8FFC /* XCRemoteSwiftPackageReference "llama" */,
+			);
+			productRefGroup = 24296E652C585368004D8FFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				24296E632C585368004D8FFC /* Gary_Llama */,
+				24296E732C58536B004D8FFC /* Gary_LlamaTests */,
+				24296E7D2C58536B004D8FFC /* Gary_LlamaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		24296E622C585368004D8FFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24296E942C586033004D8FFC /* Qwen2-1.5B-Instruct.Q4_K_S.gguf in Resources */,
+				24296E6F2C58536B004D8FFC /* Preview Assets.xcassets in Resources */,
+				24296E6C2C58536B004D8FFC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24296E722C58536B004D8FFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24296E7C2C58536B004D8FFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		24296E602C585368004D8FFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24296ECD2C588E67004D8FFC /* LoadCustomButton.swift in Sources */,
+				24296E6A2C585368004D8FFC /* ContentView.swift in Sources */,
+				24296ED22C58908C004D8FFC /* LlamaState.swift in Sources */,
+				24296E682C585368004D8FFC /* Gary_LlamaApp.swift in Sources */,
+				24296EC52C588930004D8FFC /* LibLlama.swift in Sources */,
+				24296ECB2C588E58004D8FFC /* InputButton.swift in Sources */,
+				24296EC92C588E47004D8FFC /* DownloadButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24296E702C58536B004D8FFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24296E792C58536B004D8FFC /* Gary_LlamaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24296E7A2C58536B004D8FFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24296E832C58536B004D8FFC /* Gary_LlamaUITests.swift in Sources */,
+				24296E852C58536B004D8FFC /* Gary_LlamaUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24296E762C58536B004D8FFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24296E632C585368004D8FFC /* Gary_Llama */;
+			targetProxy = 24296E752C58536B004D8FFC /* PBXContainerItemProxy */;
+		};
+		24296E802C58536B004D8FFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24296E632C585368004D8FFC /* Gary_Llama */;
+			targetProxy = 24296E7F2C58536B004D8FFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		24296E862C58536B004D8FFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		24296E872C58536B004D8FFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		24296E892C58536B004D8FFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Gary_Llama/Preview Content\"";
+				DEVELOPMENT_TEAM = SNG8SZK5TY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"(PROJECT_DIR)/Gary_Llama/llama.cpp/ggml/include/**",
+					"(PROJECT_DIR)/Gary_Llama/llama.cpp/include/**",
+					"(PROJECT_DIR)/Gary_Llama/llama.cpp/ggml/include/ggml.h",
+					"/Users/calebm/Gary_Llama/Gary_Llama/llama.cpp/ggml/include/**",
+					"/Users/caleb/Downloads/Gary_Llama-2/llama.cpp/include/llama.h/**",
+				);
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-std=c++20",
+				);
+				OTHER_LDFLAGS = "-lc++";
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepDev.Gary-Llama";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Gary_Llama/Gary_Llama-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		24296E8A2C58536B004D8FFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Gary_Llama/Preview Content\"";
+				DEVELOPMENT_TEAM = SNG8SZK5TY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"(PROJECT_DIR)/Gary_Llama/llama.cpp/ggml/include/**",
+					"(PROJECT_DIR)/Gary_Llama/llama.cpp/include/**",
+					"(PROJECT_DIR)/Gary_Llama/llama.cpp/ggml/include/ggml.h",
+					"/Users/calebm/Gary_Llama/Gary_Llama/llama.cpp/ggml/include/**",
+					"/Users/caleb/Downloads/Gary_Llama-2/llama.cpp/include/llama.h/**",
+				);
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-std=c++20",
+				);
+				OTHER_LDFLAGS = "-lc++";
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepDev.Gary-Llama";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Gary_Llama/Gary_Llama-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		24296E8C2C58536B004D8FFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepDev.Gary-LlamaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gary_Llama.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gary_Llama";
+			};
+			name = Debug;
+		};
+		24296E8D2C58536B004D8FFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepDev.Gary-LlamaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gary_Llama.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gary_Llama";
+			};
+			name = Release;
+		};
+		24296E8F2C58536B004D8FFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepDev.Gary-LlamaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Gary_Llama;
+			};
+			name = Debug;
+		};
+		24296E902C58536B004D8FFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepDev.Gary-LlamaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Gary_Llama;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		24296E5F2C585368004D8FFC /* Build configuration list for PBXProject "Gary_Llama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24296E862C58536B004D8FFC /* Debug */,
+				24296E872C58536B004D8FFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24296E882C58536B004D8FFC /* Build configuration list for PBXNativeTarget "Gary_Llama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24296E892C58536B004D8FFC /* Debug */,
+				24296E8A2C58536B004D8FFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24296E8B2C58536B004D8FFC /* Build configuration list for PBXNativeTarget "Gary_LlamaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24296E8C2C58536B004D8FFC /* Debug */,
+				24296E8D2C58536B004D8FFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24296E8E2C58536B004D8FFC /* Build configuration list for PBXNativeTarget "Gary_LlamaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24296E8F2C58536B004D8FFC /* Debug */,
+				24296E902C58536B004D8FFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		24296ED52C589485004D8FFC /* XCRemoteSwiftPackageReference "llama" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ggerganov/llama.cpp";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		24296ED62C589485004D8FFC /* llama */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24296ED52C589485004D8FFC /* XCRemoteSwiftPackageReference "llama" */;
+			productName = llama;
+		};
+		3C32B5592C5AFA9300A03B04 /* llama */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = llama;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 24296E5C2C585368004D8FFC /* Project object */;
+}

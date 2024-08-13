@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4E8ED558-F280-4384-903B-EDA5E5291875"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B37F2A58-B3DA-41DB-A59B-699FEBFBF97A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Gary_Llama/InputButton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "download()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B37F2A58-B3DA-41DB-A59B-699FEBFBF97A - 569e45784687c3f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Gary_Llama.InputButton.download() -&gt; ()"
+                  moduleName = "Gary_Llama"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/caleb/Downloads/Gary_Llama-2/Gary_Llama/InputButton.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76">
+               </Location>
+               <Location
+                  uuid = "B37F2A58-B3DA-41DB-A59B-699FEBFBF97A - 177a9cfba99cf473"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 @Sendable (__C.NSProgress, Foundation.NSKeyValueObservedChange&lt;Swift.Double&gt;) -&gt; () in Gary_Llama.InputButton.download() -&gt; ()"
+                  moduleName = "Gary_Llama"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/caleb/Downloads/Gary_Llama-2/Gary_Llama/InputButton.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

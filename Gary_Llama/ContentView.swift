@@ -115,6 +115,9 @@ struct ContentView: View {
         }
     }
 
+
+    
+    
     struct DrawerView: View {
 
         @ObservedObject var llamaState: LlamaState
@@ -138,6 +141,7 @@ struct ContentView: View {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             return paths[0]
         }
+
         var body: some View {
             List {
                 Section(header: Text("Download Models From Hugging Face")) {
@@ -150,6 +154,12 @@ struct ContentView: View {
                         DownloadButton(llamaState: llamaState, modelName: model.name, modelUrl: model.url, filename: model.filename)
                     }
                     .onDelete(perform: delete)
+
+                    // Add this text below the downloaded models
+                    Text("To load a model, tap load and then go back to the chat log")
+                        .font(.custom("HelveticaNeue", size: 14))
+                        .foregroundColor(.gray)
+                        .padding(.top, 5)
                 }
                 Section(header: Text("Default Models")) {
                     ForEach(llamaState.undownloadedModels) { model in
@@ -179,7 +189,9 @@ struct ContentView: View {
             }
         }
     }
-}
+
+    }
+
 
 // Helper to use hex colors
 extension Color {

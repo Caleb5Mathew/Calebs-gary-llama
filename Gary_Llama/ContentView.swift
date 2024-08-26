@@ -7,7 +7,6 @@
 
 
 
-
 import SwiftUI
 
 struct ContentView: View {
@@ -79,7 +78,7 @@ struct ContentView: View {
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
 
-                NavigationLink(destination: DrawerView(llamaState: llamaState)) {
+                NavigationLink(destination: FullScreenDrawerView(llamaState: llamaState)) {
                     Text("View Models")
                         .font(.custom("HelveticaNeue", size: 14))
                         .foregroundColor(.white)
@@ -93,6 +92,7 @@ struct ContentView: View {
             .background(Color(hex: "#dedfdb"))  // Set the background of the entire VStack
             .edgesIgnoringSafeArea(.all)  // Ensure the background extends to the edges of the screen
         }
+        .navigationViewStyle(StackNavigationViewStyle())  // Force single-column layout
         .background(Color(hex: "#dedfdb"))  // Set the background of the entire NavigationView
     }
 
@@ -114,35 +114,15 @@ struct ContentView: View {
             await llamaState.clear()
         }
     }
+}
 
+// Full-screen view to replace DrawerView
+struct FullScreenDrawerView: View {
+    @ObservedObject var llamaState: LlamaState
+    @State private var showingHelp = false
 
-    
-    
-    struct DrawerView: View {
-
-        @ObservedObject var llamaState: LlamaState
-        @State private var showingHelp = false
-        func delete(at offsets: IndexSet) {
-            offsets.forEach { offset in
-                let model = llamaState.downloadedModels[offset]
-                let fileURL = getDocumentsDirectory().appendingPathComponent(model.filename)
-                do {
-                    try FileManager.default.removeItem(at: fileURL)
-                } catch {
-                    print("Error deleting file: \(error)")
-                }
-            }
-
-            // Remove models from downloadedModels array
-            llamaState.downloadedModels.remove(atOffsets: offsets)
-        }
-
-        func getDocumentsDirectory() -> URL {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return paths[0]
-        }
-
-        var body: some View {
+    var body: some View {
+        NavigationView {
             List {
                 Section(header: Text("Download Models From Hugging Face")) {
                     HStack {
@@ -187,11 +167,33 @@ struct ContentView: View {
                     Spacer()
                 }
             }
+            .navigationTitle("Model Settings")
         }
+        .navigationViewStyle(StackNavigationViewStyle())  // Force single-column layout
+        .background(Color(hex: "#dedfdb"))  // Set the background of the entire view
+        .edgesIgnoringSafeArea(.all)  // Ensure the background extends to the edges of the screen
     }
 
+    func delete(at offsets: IndexSet) {
+        offsets.forEach { offset in
+            let model = llamaState.downloadedModels[offset]
+            let fileURL = getDocumentsDirectory().appendingPathComponent(model.filename)
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+            } catch {
+                print("Error deleting file: \(error)")
+            }
+        }
+
+        // Remove models from downloadedModels array
+        llamaState.downloadedModels.remove(atOffsets: offsets)
     }
 
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+}
 
 // Helper to use hex colors
 extension Color {

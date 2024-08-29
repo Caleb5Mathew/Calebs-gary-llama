@@ -6,14 +6,16 @@
 //
 
 
-
-
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     @StateObject var llamaState = LlamaState()
     @State private var multiLineText = ""
     @State private var showingHelp = false    // To track if Help Sheet should be shown
+    @State private var isKeyboardVisible = false // Track keyboard visibility
+    
+    @State private var keyboardCancellables = Set<AnyCancellable>() // To store multiple cancellables
 
     var body: some View {
         NavigationView {
@@ -38,7 +40,7 @@ struct ContentView: View {
                                 .stroke(Color(hex: "#dedfdb"), lineWidth: 0.5)
                         )
                         .onTapGesture {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            hideKeyboard()
                         }
                 }
                 .background(Color(hex: "#dedfdb"))  // Ensure the ScrollView background matches
@@ -53,6 +55,9 @@ struct ContentView: View {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(Color(hex: "#dedfdb"), lineWidth: 0.5)
                     )
+                    .onTapGesture {
+                        // Optionally handle tap on TextEditor
+                    }
 
                 HStack {
                     Spacer()  // Add Spacer to separate buttons
@@ -79,23 +84,64 @@ struct ContentView: View {
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
 
-                NavigationLink(destination: DrawerView(llamaState: llamaState)) {
-                    Text("View Models")
-                        .font(.custom("HelveticaNeue", size: 14))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color(hex: "#253439"))
-                        .cornerRadius(8)
-                }
+                // Replace "View Models" with "Load Model"
+                LoadButton(
+                    llamaState: llamaState,
+                    modelName: "Qwen2-1.5B-Instruct",
+                    filename: "Qwen2-1.5B-Instruct.Q8_0.gguf"
+                )
                 .padding()
 
             }
             .background(Color(hex: "#dedfdb"))  // Set the background of the entire VStack
             .edgesIgnoringSafeArea(.all)  // Ensure the background extends to the edges of the screen
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if isKeyboardVisible {
+                        Button(action: {
+                            hideKeyboard()
+                        }) {
+                            Image(systemName: "arrow.uturn.left.circle")
+                                .imageScale(.large)
+                                .foregroundColor(.black)
+                        }
+                    }
+                }
+            }
+            .onAppear {
+                // Observe keyboard show notification
+                NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+                    .sink { _ in
+                        withAnimation {
+                            isKeyboardVisible = true
+                        }
+                    }
+                    .store(in: &keyboardCancellables)
+                
+                // Observe keyboard hide notification
+                NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+                    .sink { _ in
+                        withAnimation {
+                            isKeyboardVisible = false
+                        }
+                    }
+                    .store(in: &keyboardCancellables)
+            }
+            .onDisappear {
+                // Cancel all keyboard-related subscriptions
+                keyboardCancellables.forEach { $0.cancel() }
+                keyboardCancellables.removeAll()
+            }
         }
         .background(Color(hex: "#dedfdb"))  // Set the background of the entire NavigationView
     }
 
+    // Function to hide the keyboard
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+
+    // Function to send text
     func sendText() {
         Task {
             await llamaState.complete(text: multiLineText)
@@ -103,25 +149,25 @@ struct ContentView: View {
         }
     }
 
+    // Function to benchmark
     func bench() {
         Task {
             await llamaState.bench()
         }
     }
 
+    // Function to clear text
     func clear() {
         Task {
             await llamaState.clear()
         }
     }
 
-
-    
-    
+    // DrawerView Definition (kept for reference; can be removed if not used elsewhere)
     struct DrawerView: View {
-
         @ObservedObject var llamaState: LlamaState
         @State private var showingHelp = false
+
         func delete(at offsets: IndexSet) {
             offsets.forEach { offset in
                 let model = llamaState.downloadedModels[offset]
@@ -132,8 +178,6 @@ struct ContentView: View {
                     print("Error deleting file: \(error)")
                 }
             }
-
-            // Remove models from downloadedModels array
             llamaState.downloadedModels.remove(atOffsets: offsets)
         }
 
@@ -155,8 +199,7 @@ struct ContentView: View {
                     }
                     .onDelete(perform: delete)
 
-                    // Add this text below the downloaded models
-                    Text("To load a model, tap load and then go back to the chat log")
+                    Text("To load a model, click the Load button on the bottom of the screen!")
                         .font(.custom("HelveticaNeue", size: 14))
                         .foregroundColor(.gray)
                         .padding(.top, 5)
@@ -176,7 +219,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingHelp) {    // Sheet for help modal
+            .sheet(isPresented: $showingHelp) {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         Text("1. Make sure the model is in GGUF Format")
@@ -186,14 +229,13 @@ struct ContentView: View {
                     }
                     Spacer()
                 }
+                .padding()
             }
         }
     }
+}
 
-    }
-
-
-// Helper to use hex colors
+// Helper extension to use hex colors
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
@@ -209,6 +251,7 @@ extension Color {
     }
 }
 
+// Preview provider for SwiftUI previews
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

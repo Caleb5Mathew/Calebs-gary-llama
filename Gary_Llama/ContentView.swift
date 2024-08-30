@@ -5,7 +5,6 @@
 //  Created by Caleb Matthews  on 7/29/24.
 //
 
-
 import SwiftUI
 import Combine
 
@@ -134,6 +133,7 @@ struct ContentView: View {
             }
         }
         .background(Color(hex: "#dedfdb"))  // Set the background of the entire NavigationView
+        .navigationViewStyle(StackNavigationViewStyle()) // Use StackNavigationViewStyle for consistent behavior on iPad
     }
 
     // Function to hide the keyboard

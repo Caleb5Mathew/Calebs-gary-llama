@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  Gary_Llama
-//
-//  Created by Caleb Matthews  on 7/29/24.
-//
-
-
 import SwiftUI
 import Combine
 
@@ -50,7 +42,7 @@ struct ContentView: View {
                 TextEditor(text: $multiLineText)
                     .font(.custom("HelveticaNeue", size: 14))
                     .foregroundColor(.black)
-                    .background(Color.white)  // Ensure background is white
+                    .background(Color.white)
                     .frame(height: 80)
                     .padding()
                     .overlay(
@@ -58,8 +50,34 @@ struct ContentView: View {
                             .stroke(Color(hex: "#dedfdb"), lineWidth: 0.5)
                     )
                     .onTapGesture {
-                        // Optionally handle tap on TextEditor
+                        // Handle tap on TextEditor to make sure keyboard appears
                     }
+                    .onSubmit {
+                        sendText() // Trigger send when return key is pressed
+                    }
+                    .background(GeometryReader { geometry in
+                        Color.clear.onAppear {
+                            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+                                .sink { notification in
+                                    if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                                        let keyboardHeight = keyboardFrame.height
+                                        let bottomPadding = geometry.size.height - keyboardHeight - 100 // Adjust to your needs
+                                        withAnimation {
+                                            isKeyboardVisible = true
+                                        }
+                                    }
+                                }
+                                .store(in: &keyboardCancellables)
+                            
+                            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+                                .sink { _ in
+                                    withAnimation {
+                                        isKeyboardVisible = false
+                                    }
+                                }
+                                .store(in: &keyboardCancellables)
+                        }
+                    })
 
                 Spacer() // Add spacer to move the content up
 
@@ -250,7 +268,9 @@ extension Color {
         scanner.scanHexInt64(&rgbValue)
 
         let red = Double((rgbValue & 0xff0000) >> 16) / 255.0
-        let green = Double((rgbValue & 0xff00) >> 8) / 255.0
+        let green = Double((rgbValue & 0xff00) >> 8Sorry for the cutoff! Here's the rest of the code:
+
+```swift
         let blue = Double(rgbValue & 0xff) / 255.0
 
         self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1)

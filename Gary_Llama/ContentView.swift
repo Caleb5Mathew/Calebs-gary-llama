@@ -58,7 +58,15 @@ struct ContentView: View {
                     .onSubmit {
                         sendText()
                     }
-                    .padding(.bottom, isKeyboardVisible ? 20 : 0) // Adjust the padding
+                    .padding(.bottom, isKeyboardVisible ? 0 : 0) // Adjust the padding
+
+                // Load Model Button
+                LoadButton(
+                    llamaState: llamaState,
+                    modelName: "stablelm-2-zephyr-1_6b",
+                    filename: "stablelm-2-zephyr-1_6b-Q4_1.gguf"
+                )
+                .padding()
 
                 // HStack for buttons
                 HStack {
@@ -85,15 +93,7 @@ struct ContentView: View {
                 .padding()
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
-                .padding(.bottom, isKeyboardVisible ? 10 : 0)
-
-                // Load Model Button
-                LoadButton(
-                    llamaState: llamaState,
-                    modelName: "stablelm-2-zephyr-1_6b",
-                    filename: "stablelm-2-zephyr-1_6b-Q4_1.gguf"
-                )
-                .padding(.bottom, isKeyboardVisible ? 10 : 0)
+                .padding(.bottom, isKeyboardVisible ? 10 : 0) // Adjust the padding
             }
             .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the entire view padding
             .background(Color(hex: "#dedfdb"))

@@ -4,21 +4,22 @@ import Combine
 struct ContentView: View {
     @StateObject var llamaState = LlamaState()
     @State private var multiLineText = ""
-    @State private var showingHelp = false    // To track if Help Sheet should be shown
-    @State private var isKeyboardVisible = false // Track keyboard visibility
+    @State private var showingHelp = false
+    @State private var isKeyboardVisible = false
     
-    @State private var keyboardCancellables = Set<AnyCancellable>() // To store multiple cancellables
+    @State private var keyboardCancellables = Set<AnyCancellable>()
 
     var body: some View {
         NavigationView {
             VStack {
-                // Display the "GaryLLM_header" image at the Top Center just below the notch
-                Image("GaryLLM_header")  // This is the image name
+                // Header image at the top
+                Image("GaryLLM_header")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 50)  // Smaller height to resemble a logo
-                    .padding(.top, 50)  // Adjust padding to position below the notch
+                    .frame(height: 50)
+                    .padding(.top, 50)
 
+                // Scrollable text view for the message log
                 ScrollView(.vertical, showsIndicators: true) {
                     Text(llamaState.messageLog)
                         .font(.custom("HelveticaNeue", size: 14))
@@ -35,10 +36,11 @@ struct ContentView: View {
                             hideKeyboard()
                         }
                 }
-                .background(Color(hex: "#dedfdb"))  // Ensure the ScrollView background matches
+                .background(Color(hex: "#dedfdb"))
 
-                Spacer() // Add spacer to move the content up
+                Spacer() // Push the content above the buttons
 
+                // Text editor for input
                 TextEditor(text: $multiLineText)
                     .font(.custom("HelveticaNeue", size: 14))
                     .foregroundColor(.black)
@@ -49,19 +51,18 @@ struct ContentView: View {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(Color(hex: "#dedfdb"), lineWidth: 0.5)
                     )
-                    .environment(\.colorScheme, .light)  // Enforce light mode for the TextEditor
+                    .environment(\.colorScheme, .light)
                     .onTapGesture {
                         // Handle tap on TextEditor
                     }
                     .onSubmit {
-                        sendText() // Trigger send when return key is pressed
+                        sendText()
                     }
-                    .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the padding dynamically based on keyboard visibility
+                    .padding(.bottom, isKeyboardVisible ? 20 : 0) // Adjust the padding
 
-                Spacer() // Add spacer to move the content up
-
+                // HStack for buttons
                 HStack {
-                    Spacer()  // Add Spacer to separate buttons
+                    Spacer()
                     Button("Send") {
                         sendText()
                     }
@@ -77,14 +78,14 @@ struct ContentView: View {
                     Button("Copy") {
                         UIPasteboard.general.string = llamaState.messageLog
                     }
-                    Spacer()  // Add Spacer to separate buttons
+                    Spacer()
                 }
                 .font(.custom("HelveticaNeue", size: 14))
                 .foregroundColor(.white)
                 .padding()
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
-                .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the padding dynamically based on keyboard visibility
+                .padding(.bottom, isKeyboardVisible ? 10 : 0)
 
                 // Load Model Button
                 LoadButton(
@@ -92,13 +93,11 @@ struct ContentView: View {
                     modelName: "stablelm-2-zephyr-1_6b",
                     filename: "stablelm-2-zephyr-1_6b-Q4_1.gguf"
                 )
-                .padding()
-                .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the padding dynamically based on keyboard visibility
-
-                Spacer() // Final spacer to push everything up when keyboard is visible
+                .padding(.bottom, isKeyboardVisible ? 10 : 0)
             }
-            .background(Color(hex: "#dedfdb"))  // Set the background of the entire VStack
-            .edgesIgnoringSafeArea(.all)  // Ensure the background extends to the edges of the screen
+            .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the entire view padding
+            .background(Color(hex: "#dedfdb"))
+            .edgesIgnoringSafeArea(.all)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     if isKeyboardVisible {
@@ -132,13 +131,12 @@ struct ContentView: View {
                     .store(in: &keyboardCancellables)
             }
             .onDisappear {
-                // Cancel all keyboard-related subscriptions
                 keyboardCancellables.forEach { $0.cancel() }
                 keyboardCancellables.removeAll()
             }
         }
-        .background(Color(hex: "#dedfdb"))  // Set the background of the entire NavigationView
-        .navigationViewStyle(StackNavigationViewStyle()) // Use StackNavigationViewStyle for consistent behavior on iPad
+        .background(Color(hex: "#dedfdb"))
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
     // Function to hide the keyboard
@@ -167,75 +165,75 @@ struct ContentView: View {
             await llamaState.clear()
         }
     }
+}
 
-    // DrawerView Definition (kept for reference; can be removed if not used elsewhere)
-    struct DrawerView: View {
-        @ObservedObject var llamaState: LlamaState
-        @State private var showingHelp = false
+// DrawerView Definition (kept for reference; can be removed if not used elsewhere)
+struct DrawerView: View {
+    @ObservedObject var llamaState: LlamaState
+    @State private var showingHelp = false
 
-        func delete(at offsets: IndexSet) {
-            offsets.forEach { offset in
-                let model = llamaState.downloadedModels[offset]
-                let fileURL = getDocumentsDirectory().appendingPathComponent(model.filename)
-                do {
-                    try FileManager.default.removeItem(at: fileURL)
-                } catch {
-                    print("Error deleting file: \(error)")
-                }
+    func delete(at offsets: IndexSet) {
+        offsets.forEach { offset in
+            let model = llamaState.downloadedModels[offset]
+            let fileURL = getDocumentsDirectory().appendingPathComponent(model.filename)
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+            } catch {
+                print("Error deleting file: \(error)")
             }
-            llamaState.downloadedModels.remove(atOffsets: offsets)
         }
+        llamaState.downloadedModels.remove(atOffsets: offsets)
+    }
 
-        func getDocumentsDirectory() -> URL {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return paths[0]
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+
+    var body: some View {
+        List {
+            Section(header: Text("Download Models From Hugging Face")) {
+                HStack {
+                    InputButton(llamaState: llamaState)
+                }
+            }
+            Section(header: Text("Downloaded Models")) {
+                ForEach(llamaState.downloadedModels) { model in
+                    DownloadButton(llamaState: llamaState, modelName: model.name, modelUrl: model.url, filename: model.filename)
+                }
+                .onDelete(perform: delete)
+
+                Text("To load a model, click the Load button on the bottom of the screen!")
+                    .font(.custom("HelveticaNeue", size: 14))
+                    .foregroundColor(.gray)
+                    .padding(.top, 5)
+            }
+            Section(header: Text("Default Models")) {
+                ForEach(llamaState.undownloadedModels) { model in
+                    DownloadButton(llamaState: llamaState, modelName: model.name, modelUrl: model.url, filename: model.filename)
+                }
+            }
         }
-
-        var body: some View {
-            List {
-                Section(header: Text("Download Models From Hugging Face")) {
-                    HStack {
-                        InputButton(llamaState: llamaState)
-                    }
-                }
-                Section(header: Text("Downloaded Models")) {
-                    ForEach(llamaState.downloadedModels) { model in
-                        DownloadButton(llamaState: llamaState, modelName: model.name, modelUrl: model.url, filename: model.filename)
-                    }
-                    .onDelete(perform: delete)
-
-                    Text("To load a model, click the Load button on the bottom of the screen!")
-                        .font(.custom("HelveticaNeue", size: 14))
-                        .foregroundColor(.gray)
-                        .padding(.top, 5)
-                }
-                Section(header: Text("Default Models")) {
-                    ForEach(llamaState.undownloadedModels) { model in
-                        DownloadButton(llamaState: llamaState, modelName: model.name, modelUrl: model.url, filename: model.filename)
-                    }
+        .font(.custom("HelveticaNeue", size: 14))
+        .background(Color(hex: "#dedfdb"))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Help") {
+                    showingHelp = true
                 }
             }
-            .font(.custom("HelveticaNeue", size: 14))
-            .background(Color(hex: "#dedfdb"))
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Help") {
-                        showingHelp = true
-                    }
-                }
-            }
-            .sheet(isPresented: $showingHelp) {
+        }
+        .sheet(isPresented: $showingHelp) {
+            VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        Text("1. Make sure the model is in GGUF Format")
-                            .padding()
-                        Text("2. Copy the download link of the quantized model")
-                            .padding()
-                    }
-                    Spacer()
+                    Text("1. Make sure the model is in GGUF Format")
+                        .padding()
+                    Text("2. Copy the download link of the quantized model")
+                        .padding()
                 }
-                .padding()
+                Spacer()
             }
+            .padding()
         }
     }
 }

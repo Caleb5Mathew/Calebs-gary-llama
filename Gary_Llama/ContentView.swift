@@ -5,6 +5,7 @@
 //  Created by Caleb Matthews  on 7/29/24.
 //
 
+
 import SwiftUI
 import Combine
 
@@ -44,10 +45,12 @@ struct ContentView: View {
                 }
                 .background(Color(hex: "#dedfdb"))  // Ensure the ScrollView background matches
 
+                Spacer() // Add spacer to move the content up
+
                 TextEditor(text: $multiLineText)
                     .font(.custom("HelveticaNeue", size: 14))
                     .foregroundColor(.black)
-                    .background(Color.white)  // White background for the TextEditor for contrast
+                    .background(Color.white)  // Ensure background is white
                     .frame(height: 80)
                     .padding()
                     .overlay(
@@ -57,6 +60,8 @@ struct ContentView: View {
                     .onTapGesture {
                         // Optionally handle tap on TextEditor
                     }
+
+                Spacer() // Add spacer to move the content up
 
                 HStack {
                     Spacer()  // Add Spacer to separate buttons
@@ -83,14 +88,15 @@ struct ContentView: View {
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
 
-                // Replace "View Models" with "Load Model"
+                // Load Model Button
                 LoadButton(
                     llamaState: llamaState,
-                    modelName: "Qwen2-1.5B-Instruct",
-                    filename: "Qwen2-1.5B-Instruct.Q8_0.gguf"
+                    modelName: "stablelm-2-zephyr-1_6b",
+                    filename: "stablelm-2-zephyr-1_6b.gguf"
                 )
                 .padding()
 
+                Spacer() // Final spacer to push everything up when keyboard is visible
             }
             .background(Color(hex: "#dedfdb"))  // Set the background of the entire VStack
             .edgesIgnoringSafeArea(.all)  // Ensure the background extends to the edges of the screen

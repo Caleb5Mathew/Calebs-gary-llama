@@ -259,23 +259,25 @@ struct ContentView: View {
     }
 }
 
-// Helper extension to use hex colors
+
 extension Color {
     init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 1 // skip #
+        var hexFormatted = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        if hexFormatted.hasPrefix("#") {
+            hexFormatted.remove(at: hexFormatted.startIndex)
+        }
+        
         var rgbValue: UInt64 = 0
-        scanner.scanHexInt64(&rgbValue)
+        Scanner(string: hexFormatted).scanHexInt64(&rgbValue)
 
-        let red = Double((rgbValue & 0xff0000) >> 16) / 255.0
-        let green = Double((rgbValue & 0xff00) >> 8Sorry for the cutoff! Here's the rest of the code:
+        let red = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgbValue & 0x0000FF) / 255.0
 
-```swift
-        let blue = Double(rgbValue & 0xff) / 255.0
-
-        self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1)
+        self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1.0)
     }
 }
+
 
 // Preview provider for SwiftUI previews
 struct ContentView_Previews: PreviewProvider {

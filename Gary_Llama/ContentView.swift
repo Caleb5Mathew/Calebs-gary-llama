@@ -92,7 +92,7 @@ struct ContentView: View {
                 LoadButton(
                     llamaState: llamaState,
                     modelName: "stablelm-2-zephyr-1_6b",
-                    filename: "stablelm-2-zephyr-1_6b.gguf"
+                    filename: "stablelm-2-zephyr-1_6b-Q4_1.gguf"
                 )
                 .padding()
 

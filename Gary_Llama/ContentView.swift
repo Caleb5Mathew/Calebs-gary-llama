@@ -49,35 +49,14 @@ struct ContentView: View {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(Color(hex: "#dedfdb"), lineWidth: 0.5)
                     )
+                    .environment(\.colorScheme, .light)  // Enforce light mode for the TextEditor
                     .onTapGesture {
-                        // Handle tap on TextEditor to make sure keyboard appears
+                        // Handle tap on TextEditor
                     }
                     .onSubmit {
                         sendText() // Trigger send when return key is pressed
                     }
-                    .background(GeometryReader { geometry in
-                        Color.clear.onAppear {
-                            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-                                .sink { notification in
-                                    if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-                                        let keyboardHeight = keyboardFrame.height
-                                        let bottomPadding = geometry.size.height - keyboardHeight - 100 // Adjust to your needs
-                                        withAnimation {
-                                            isKeyboardVisible = true
-                                        }
-                                    }
-                                }
-                                .store(in: &keyboardCancellables)
-                            
-                            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-                                .sink { _ in
-                                    withAnimation {
-                                        isKeyboardVisible = false
-                                    }
-                                }
-                                .store(in: &keyboardCancellables)
-                        }
-                    })
+                    .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the padding dynamically based on keyboard visibility
 
                 Spacer() // Add spacer to move the content up
 
@@ -105,6 +84,7 @@ struct ContentView: View {
                 .padding()
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
+                .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the padding dynamically based on keyboard visibility
 
                 // Load Model Button
                 LoadButton(
@@ -113,6 +93,7 @@ struct ContentView: View {
                     filename: "stablelm-2-zephyr-1_6b-Q4_1.gguf"
                 )
                 .padding()
+                .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the padding dynamically based on keyboard visibility
 
                 Spacer() // Final spacer to push everything up when keyboard is visible
             }
@@ -259,7 +240,7 @@ struct ContentView: View {
     }
 }
 
-
+// Helper extension to use hex colors
 extension Color {
     init(hex: String) {
         var hexFormatted = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -277,7 +258,6 @@ extension Color {
         self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1.0)
     }
 }
-
 
 // Preview provider for SwiftUI previews
 struct ContentView_Previews: PreviewProvider {

@@ -6,6 +6,7 @@ struct ContentView: View {
     @State private var multiLineText = ""
     @State private var showingHelp = false
     @State private var isKeyboardVisible = false
+    @State private var keyboardHeight: CGFloat = 0
     
     @State private var keyboardCancellables = Set<AnyCancellable>()
 
@@ -58,7 +59,7 @@ struct ContentView: View {
                     .onSubmit {
                         sendText()
                     }
-                    .padding(.bottom, isKeyboardVisible ? 0 : 0) // Adjust the padding
+                    .padding(.bottom, isKeyboardVisible ? keyboardHeight + 10 : 0) // Adjust the padding
 
                 // Load Model Button
                 LoadButton(
@@ -66,7 +67,7 @@ struct ContentView: View {
                     modelName: "stablelm-2-zephyr-1_6b",
                     filename: "stablelm-2-zephyr-1_6b-Q4_1.gguf"
                 )
-                .padding()
+                .padding(.bottom, isKeyboardVisible ? keyboardHeight + 10 : 0) // Adjust the padding
 
                 // HStack for buttons
                 HStack {
@@ -93,30 +94,19 @@ struct ContentView: View {
                 .padding()
                 .background(Color(hex: "#253439"))
                 .cornerRadius(8)
-                .padding(.bottom, isKeyboardVisible ? 10 : 0) // Adjust the padding
+                .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0) // Adjust the padding
             }
-            .padding(.bottom, isKeyboardVisible ? 300 : 0) // Adjust the entire view padding
             .background(Color(hex: "#dedfdb"))
             .edgesIgnoringSafeArea(.all)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    if isKeyboardVisible {
-                        Button(action: {
-                            hideKeyboard()
-                        }) {
-                            Image(systemName: "arrow.uturn.left.circle")
-                                .imageScale(.large)
-                                .foregroundColor(.black)
-                        }
-                    }
-                }
-            }
             .onAppear {
                 // Observe keyboard show notification
                 NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-                    .sink { _ in
-                        withAnimation {
-                            isKeyboardVisible = true
+                    .sink { notification in
+                        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                            self.keyboardHeight = keyboardFrame.height
+                            withAnimation {
+                                isKeyboardVisible = true
+                            }
                         }
                     }
                     .store(in: &keyboardCancellables)
